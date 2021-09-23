@@ -9,7 +9,9 @@ public class DragAndDrop : MonoBehaviour
 
     public Sprite[] Sprites;
     public GameObject ToShow;
+    public GameObject[] Tiles = new GameObject[50];
     Sprite ToShowS;
+
     public void StartHolding(int x)
     {
         HoldType = x;
@@ -18,6 +20,13 @@ public class DragAndDrop : MonoBehaviour
         ToShow.SetActive(true);
     }
 
+    public void PlantAt(int a,int type)
+    {
+
+        TileScript TilesScript = Tiles[a].GetComponent<TileScript>();
+        TilesScript.Plant(type);
+
+    }
     public void StopHolding()
     {
         MouseHolding = false;
@@ -25,11 +34,16 @@ public class DragAndDrop : MonoBehaviour
         HoldType = 0;
     }
 
+    
+
     void Start()
     {
         ToShow.SetActive(false);
         ToShowS = ToShow.GetComponent<Sprite>();
+
+        
     }
+
 
     void Update()
     {
@@ -37,8 +51,10 @@ public class DragAndDrop : MonoBehaviour
         {
             StopHolding();
         }
+        
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0;
         ToShow.transform.position = pos;
     }
+    
 }

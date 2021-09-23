@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class PeaShooter : MonoBehaviour
 {
-    // Start is called before the first frame update
+    bool CanShoot = true;
+    public GameObject projectile;
+    public GameObject Mouth;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (CanShoot)
+        {
+            CanShoot = false;
+            Instantiate(projectile, Mouth.transform.position,Quaternion.identity);
+            StartCoroutine(cdr());
+        }
         
+    }
+    IEnumerator cdr()
+    {
+        yield return new WaitForSeconds(2f);
+        CanShoot = true;
     }
 }

@@ -6,6 +6,7 @@ public class TileScript : MonoBehaviour
 {
     public bool HoldingPlant = false;
     int PlantType = 0;
+    public int TileNumber = -1;
     DragAndDrop D;
     public GameObject[] plants;
     void Start()
@@ -19,17 +20,22 @@ public class TileScript : MonoBehaviour
         
     }
 
+    public void Plant(int type)
+    {
+        HoldingPlant = true;
+        GameObject plant = Instantiate(plants[type], transform.position, Quaternion.identity);
+        AllPlant A = plant.GetComponent<AllPlant>();
+        A.Tile = gameObject;
+    }
+
     void OnMouseDown()
     {
         print("clicked");
         if (HoldingPlant == false && D.MouseHolding == true)
         {
             print("entered ");
-            HoldingPlant = true;
             int type = D.HoldType;
-            GameObject plant = Instantiate(plants[type], transform.position, Quaternion.identity);
-            AllPlant A = plant.GetComponent<AllPlant>();
-            A.Tile = gameObject;
+            Plant(type);
             D.StopHolding();
         }
 
