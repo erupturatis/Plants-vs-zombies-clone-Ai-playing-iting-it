@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    bool MouseHolding = false;
+    public bool MouseHolding = false;
     public int HoldType = 0;
 
     public Sprite[] Sprites;
@@ -27,7 +27,7 @@ public class DragAndDrop : MonoBehaviour
 
     void Start()
     {
-        ToShow.SetActive(true);
+        ToShow.SetActive(false);
         ToShowS = ToShow.GetComponent<Sprite>();
     }
 

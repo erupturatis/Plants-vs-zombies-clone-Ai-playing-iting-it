@@ -21,13 +21,17 @@ public class TileScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        print("1");
-        print(D.HoldType);
-        int type = D.HoldType;
-        GameObject plant = Instantiate(plants[type], transform.position, Quaternion.identity);
-        AllPlant A = plant.GetComponent<AllPlant>();
-        A.Tile = gameObject;
-        D.StopHolding();
+        print("clicked");
+        if (HoldingPlant == false && D.MouseHolding == true)
+        {
+            print("entered ");
+            HoldingPlant = true;
+            int type = D.HoldType;
+            GameObject plant = Instantiate(plants[type], transform.position, Quaternion.identity);
+            AllPlant A = plant.GetComponent<AllPlant>();
+            A.Tile = gameObject;
+            D.StopHolding();
+        }
 
     }
 }
