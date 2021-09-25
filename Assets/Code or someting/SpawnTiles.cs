@@ -6,10 +6,12 @@ public class SpawnTiles : MonoBehaviour
 {
 
     [SerializeField] GameObject tile;
+
     [SerializeField] float distanceX;
     [SerializeField] float distanceY;
     [SerializeField] GameObject StartPos;
     DragAndDrop D;
+    public WaveManager Wm;
     void Start()
     {
         D = gameObject.GetComponent<DragAndDrop>();
@@ -26,7 +28,15 @@ public class SpawnTiles : MonoBehaviour
                 GameObject Tl = Instantiate(tile, position, Quaternion.identity);
                 int nr = j + i * 9;
                 Tl.GetComponent<TileScript>().TileNumber = nr;
+                Tl.GetComponent<TileScript>().lane = i;
+                Tl.GetComponent<TileScript>().Wm = Wm;
+                Tl.GetComponent<TileScript>().D = D;
+
+                Tl.transform.parent = gameObject.transform;
+
                 D.Tiles[nr] = Tl;
+
+
                 xt += distanceX;
             }
         }

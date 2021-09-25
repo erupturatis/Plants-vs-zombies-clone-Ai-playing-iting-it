@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class AllPlant : MonoBehaviour
 {
-    float Health = 100;
+    public float Health = 100;
     public GameObject Tile;
-    TileScript T;
+    public TileScript T;
+    public WaveManager Wm;
+    public ScriptCentralizer Sc;
     private void Start()
     {
         if (Tile)
         {
             T = Tile.GetComponent<TileScript>();
             T.HoldingPlant = true;
+            Wm = T.Wm;
         }
     }
 
     public void Die()
     {
         T.HoldingPlant = false;
+        Sc.Fitness -= 10;
         Destroy(gameObject);
     }
 

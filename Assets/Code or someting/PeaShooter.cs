@@ -7,14 +7,19 @@ public class PeaShooter : MonoBehaviour
     bool CanShoot = true;
     public GameObject projectile;
     public GameObject Mouth;
+    AllPlant Ap;
+    WaveManager Wm;
+    int lane = 0;
     void Start()
     {
-        
+        Ap = gameObject.GetComponent<AllPlant>();
+        lane = Ap.T.lane;
+        Wm = Ap.Wm;
     }
 
     void Update()
     {
-        if (CanShoot)
+        if (CanShoot && Wm.LaneCounter[lane]>0)
         {
             CanShoot = false;
             Instantiate(projectile, Mouth.transform.position,Quaternion.identity);

@@ -123,9 +123,10 @@ GameObject:
   - component: {fileID: 230487576973284765}
   - component: {fileID: 230487576973284706}
   - component: {fileID: 230487576973284764}
+  - component: {fileID: 2244372317366635568}
   m_Layer: 0
   m_Name: PlantParent
-  m_TagString: Untagged
+  m_TagString: plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a59e81ccb435e74e96b62a88f9d7ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 10
   Tile: {fileID: 0}
+  T: {fileID: 0}
+  Wm: {fileID: 0}
 --- !u!114 &230487576973284764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,3 +177,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 874147585382948663, guid: 7bd893b024bb8174886f5eeb9b2ca8a8, type: 3}
   Mouth: {fileID: 230487575386023286}
+--- !u!61 &2244372317366635568
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230487576973284707}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.025795937, y: 0.21926475}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.66833925, y: 0.5614705}
+  m_EdgeRadius: 0

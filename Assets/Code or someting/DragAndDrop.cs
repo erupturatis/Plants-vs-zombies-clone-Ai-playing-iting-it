@@ -11,6 +11,8 @@ public class DragAndDrop : MonoBehaviour
     public GameObject ToShow;
     public GameObject[] Tiles = new GameObject[50];
     Sprite ToShowS;
+    public WaveManager Wm;
+    public ScriptCentralizer Sc;
 
     public void StartHolding(int x)
     {
@@ -25,6 +27,7 @@ public class DragAndDrop : MonoBehaviour
 
         TileScript TilesScript = Tiles[a].GetComponent<TileScript>();
         TilesScript.Plant(type);
+
 
     }
     public void StopHolding()
