@@ -8,6 +8,7 @@ using Unity.MLAgents.Sensors;
 public class AgentBrain : Agent
 {
     public ScriptCentralizer Sc;
+    int x = 0;
     public override void OnActionReceived(ActionBuffers actions)
     {
         //5 continous actions for planting on each lane + 1 for doing nothing
@@ -47,6 +48,12 @@ public class AgentBrain : Agent
     {
         //plants cleared
         //zombies cleared
+        if (x != 0)
+        {
+            Sc.Hakai();
+        }
+        print(x);
+        x++;
         Sc.Wm.DestroyAll = 0;
         Sc.ST.SpawnTiless();
         //Time.timeScale = 3;

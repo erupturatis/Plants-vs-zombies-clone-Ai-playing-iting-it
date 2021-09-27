@@ -32,6 +32,7 @@ public class AllZombie : MonoBehaviour
     public void DecreaseHp(int x)
     {
         health -= x;
+        //print(health);
     }
     public void Die()
     {

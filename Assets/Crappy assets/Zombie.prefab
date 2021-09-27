@@ -154,13 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435858592dec2a745ae34f3c304be500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 30
   Type: 0
   Ms: 0.5
   lane: 0
   factor: 2
   sprite: {fileID: 2439652304048249215}
   Wm: {fileID: 0}
+  CurrentTile: {fileID: 0}
+  Sc: {fileID: 0}
+  StartX: 0
 --- !u!50 &-672909651885621008
 Rigidbody2D:
   serializedVersion: 4

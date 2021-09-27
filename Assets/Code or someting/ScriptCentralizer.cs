@@ -22,13 +22,16 @@ public class ScriptCentralizer : MonoBehaviour
 
     public Text txt;
 
-    void Hakai()
+    public void Hakai()
     {
 
         for (int j = 0; j <= 44; j++)
         {
             TileScript Tl = DD.Tiles[j].GetComponent<TileScript>();
-            Destroy(Tl.gameObject);
+            if (Tl.gameObject)
+            {
+                Destroy(Tl.gameObject);
+            }
         }
         GameObject[] Gm = GameObject.FindGameObjectsWithTag("zombie");
         int ln = Gm.Length-1;
@@ -36,6 +39,11 @@ public class ScriptCentralizer : MonoBehaviour
         {
             Destroy(Gm[i]);
         }
+        Wm.LaneCounter[0] = 0;
+        Wm.LaneCounter[1] = 0;
+        Wm.LaneCounter[2] = 0;
+        Wm.LaneCounter[3] = 0;
+        Wm.LaneCounter[4] = 0;
         Suns = 0;
         Debug.Log("All destroyed");
     }
@@ -47,7 +55,7 @@ public class ScriptCentralizer : MonoBehaviour
             Ab.AddReward(Fitness);
             Fitness = 0;
         }
-        Hakai();
+        //Hakai();
         Ab.EndEpisode();
 
     }
