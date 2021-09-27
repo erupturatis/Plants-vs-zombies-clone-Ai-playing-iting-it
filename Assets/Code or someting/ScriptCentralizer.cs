@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScriptCentralizer : MonoBehaviour
 {
@@ -8,44 +9,105 @@ public class ScriptCentralizer : MonoBehaviour
     public DragAndDrop DD;
     public WaveManager Wm;
 
-    public GenesManager Gm;
+    //public GenesManager Gm;
+
+    public AgentBrain Ab;
 
     public float Fitness = 0;
     public int Nr = 0;
     public int NextLane;
 
+    [HideInInspector]
+    public int Suns = 0;
+
+    public Text txt;
+
+    void Hakai()
+    {
+
+        for (int j = 0; j <= 44; j++)
+        {
+            TileScript Tl = DD.Tiles[j].GetComponent<TileScript>();
+            Destroy(Tl.gameObject);
+        }
+        GameObject[] Gm = GameObject.FindGameObjectsWithTag("zombie");
+        int ln = Gm.Length-1;
+        for(int i = 0; i <= ln; i++)
+        {
+            Destroy(Gm[i]);
+        }
+        Suns = 0;
+        Debug.Log("All destroyed");
+    }
+
     public void Die()
     {
-        Gm.SetDeath(Nr,Fitness);
-        Destroy(gameObject);
+        if (Fitness != 0)
+        {
+            Ab.AddReward(Fitness);
+            Fitness = 0;
+        }
+        Hakai();
+        Ab.EndEpisode();
+
     }
 
     private void Start()
     {
-        Gm = GameObject.FindObjectOfType<GenesManager>();
-        StartCoroutine(Dye());
-    }
-    private void Update()
-    {
-        NextLane = Gm.NextLane;
-        //print(NextLane);
+        StartCoroutine(AddSuns());
     }
 
-    public float[] GetTileZombieStatus()
+    private void Update()
     {
-        float[] zomb = new float[46];
-        for(int i = 0; i <= 44; i++)
+        if (Fitness != 0)
         {
-            GameObject Gm = DD.Tiles[i];
-            TileScript T = Gm.GetComponent<TileScript>();
-            zomb[i] = (float)T.ZombiesStanding;
+            Ab.AddReward(Fitness);
+            Fitness = 0;
         }
-        return zomb;
+        txt.text = "" + Suns;
     }
-    IEnumerator Dye()
+
+    public void PlantOnlane(int x)
     {
-        yield return new WaitForSeconds(120f);
-        Die();
+
+        if (Suns >= 100)
+        {
+
+            int pos = x * 9;
+            for (int j = 0; j <= 8; j++)
+            {
+                TileScript Tl = DD.Tiles[pos + j].GetComponent<TileScript>();
+                if (Tl.HoldingPlant == false)
+                {
+                    Suns -= 100;
+                    Tl.Plant(0);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            Ab.AddReward(-0.01f);
+        }
+
     }
+
+    public int[] GetNrZombie()
+    {
+        return Wm.LaneCounter;
+
+    }
+    public int[] GetClosestZombies()
+    {
+        return new int[5];
+    }
+
+    IEnumerator AddSuns()
+    {
+        yield return new WaitForSeconds(1f);
+        Suns += 25;
+        StartCoroutine(AddSuns());
+    }
+
 
 }

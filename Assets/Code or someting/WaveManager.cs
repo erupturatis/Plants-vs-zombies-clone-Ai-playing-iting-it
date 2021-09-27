@@ -9,20 +9,19 @@ public class WaveManager : MonoBehaviour
     public GameObject[] zombies;
     public GameObject SpawnPoint;
     public ScriptCentralizer Sc;
-
+    [HideInInspector]
+    public int DestroyAll = 0;
     public int[] LaneCounter = new int[5];
-    void Start()
-    {
-        
-    }
+    
+
     void Update()
     {
         if (CanSpawn)
         {
             CanSpawn = false;
-            int lane = Sc.NextLane;
+            int lane = Random.Range(0, 5);
             
-            
+                    
             Vector3 pos = new Vector3(SpawnPoint.transform.position.x , SpawnPoint.transform.position.y + lane * -1.55f, 0f);
             GameObject zombie = Instantiate(zombies[0],pos,Quaternion.identity);
             AllZombie A = zombie.GetComponent<AllZombie>();
@@ -30,7 +29,7 @@ public class WaveManager : MonoBehaviour
             A.lane = lane;
             A.Wm = GetComponent<WaveManager>();
             A.StartX = SpawnPoint.transform.position.x;
-            A.transform.parent = gameObject.transform;
+            A.transform.parent = Sc.gameObject.transform;
             LaneCounter[lane] += 1;
             StartCoroutine(Pause());
         }

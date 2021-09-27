@@ -7,6 +7,9 @@ TagManager:
   - zombie
   - plant
   - projectile
+  - tile
+  - reward
+  - wall
   layers:
   - Default
   - TransparentFX

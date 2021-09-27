@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AllZombie : MonoBehaviour
 {
-    public int health = 100;
+    public int health = 30;
     public int Type = 0;
     public float Ms = 0;
     public int lane = 0;
@@ -36,13 +36,22 @@ public class AllZombie : MonoBehaviour
     public void Die()
     {
         Sc = Wm.Sc;
-        Sc.Fitness += 50;
+        Sc.Fitness += 10;
         Wm.LaneCounter[lane] -= 1;
         if (CurrentTile)
         {
             CurrentTile.ZombiesStanding -= 1;
         }
         
+        Destroy(gameObject);
+    }
+    public void Death()
+    {
+        Wm.LaneCounter[lane] -= 1;
+        if (CurrentTile)
+        {
+            CurrentTile.ZombiesStanding -= 1;
+        }
         Destroy(gameObject);
     }
 
@@ -59,10 +68,10 @@ public class AllZombie : MonoBehaviour
  
         if (StartX-transform.position.x > 14f)
         {
-            Sc.Fitness -= 1000;
+            Sc.Fitness = -100;
             Sc.Die();
-            Destroy(gameObject);
         }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

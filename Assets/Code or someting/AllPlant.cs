@@ -22,7 +22,6 @@ public class AllPlant : MonoBehaviour
     public void Die()
     {
         T.HoldingPlant = false;
-        Sc.Fitness -= 10;
         Destroy(gameObject);
     }
 

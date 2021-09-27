@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GenesManager : MonoBehaviour
 {
+    /*
     float[,,] Weights;
     float[] Biases;
     NeuralNetwork[] anns = new NeuralNetwork[102];
@@ -435,8 +436,8 @@ public class GenesManager : MonoBehaviour
 
                 if (Sc[i])
                 {
-                    TileZombies = Sc[i].GetTileZombieStatus();
-                    int Lane = anns[i].Run(TileZombies);
+                    //TileZombies = Sc[i].GetTileZombieStatus();
+                   //int Lane = anns[i].Run(TileZombies);
                     //print(Lane);
 
                     if (Lane != 46) // if it;s not the do nothing neuron
@@ -506,4 +507,5 @@ public class GenesManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         K = 0;
     }
+    */
 }

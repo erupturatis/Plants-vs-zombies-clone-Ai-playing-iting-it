@@ -1,0 +1,29 @@
+{
+    "Planting behavior": {
+        "checkpoints": [
+            {
+                "steps": 1524,
+                "file_path": "results\\Test19\\Planting behavior\\Planting behavior-1524.onnx",
+                "reward": -701.095470852322,
+                "creation_time": 1632766731.3076348,
+                "auxillary_file_paths": [
+                    "results\\Test19\\Planting behavior\\Planting behavior-1524.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1524,
+            "file_path": "results\\Test19\\Planting behavior.onnx",
+            "reward": -701.095470852322,
+            "creation_time": 1632766731.3076348,
+            "auxillary_file_paths": [
+                "results\\Test19\\Planting behavior\\Planting behavior-1524.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.9.1+cpu"
+    }
+}
