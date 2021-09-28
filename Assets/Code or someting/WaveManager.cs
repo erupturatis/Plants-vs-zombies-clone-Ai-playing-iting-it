@@ -30,6 +30,7 @@ public class WaveManager : MonoBehaviour
             A.Wm = GetComponent<WaveManager>();
             A.StartX = SpawnPoint.transform.position.x;
             A.transform.parent = Sc.gameObject.transform;
+            A.Sc = Sc;
             LaneCounter[lane] += 1;
             StartCoroutine(Pause());
         }

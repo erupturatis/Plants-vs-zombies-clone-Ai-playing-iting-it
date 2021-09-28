@@ -11,10 +11,11 @@ public class TileScript : MonoBehaviour
     public int ZombiesStanding = 0;
     public DragAndDrop D;
     public GameObject[] plants;
-    public int lane;
+    public int lane = 0;
     public WaveManager Wm;
     public ScriptCentralizer Sc;
     public Text txt;
+
 
     // Update is called once per frame
     void Update()

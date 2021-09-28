@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AllPlant : MonoBehaviour
 {
-    public float Health = 100;
+    public float Health = 200;
     public GameObject Tile;
     public TileScript T;
     public WaveManager Wm;
     public ScriptCentralizer Sc;
+    public int Lane = 0;
     private void Start()
     {
         if (Tile)
@@ -16,6 +17,7 @@ public class AllPlant : MonoBehaviour
             T = Tile.GetComponent<TileScript>();
             T.HoldingPlant = true;
             Wm = T.Wm;
+            Lane = T.lane;
         }
     }
 

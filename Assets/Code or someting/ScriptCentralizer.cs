@@ -17,6 +17,8 @@ public class ScriptCentralizer : MonoBehaviour
     public int Nr = 0;
     public int NextLane;
 
+    public int closestZombieLane = 0;
+
     [HideInInspector]
     public int Suns = 0;
 
@@ -37,7 +39,11 @@ public class ScriptCentralizer : MonoBehaviour
         int ln = Gm.Length-1;
         for(int i = 0; i <= ln; i++)
         {
-            Destroy(Gm[i]);
+            AllZombie Al = Gm[i].GetComponent<AllZombie>();
+            if(Al.Sc == GetComponent<ScriptCentralizer>())
+            {
+                Al.Death();
+            }
         }
         Wm.LaneCounter[0] = 0;
         Wm.LaneCounter[1] = 0;
@@ -45,7 +51,7 @@ public class ScriptCentralizer : MonoBehaviour
         Wm.LaneCounter[3] = 0;
         Wm.LaneCounter[4] = 0;
         Suns = 0;
-        Debug.Log("All destroyed");
+        //Debug.Log("All destroyed");
     }
 
     public void Die()
@@ -67,6 +73,7 @@ public class ScriptCentralizer : MonoBehaviour
 
     private void Update()
     {
+        Ab.AddReward(0.01f);
         if (Fitness != 0)
         {
             Ab.AddReward(Fitness);
@@ -89,15 +96,37 @@ public class ScriptCentralizer : MonoBehaviour
                 {
                     Suns -= 100;
                     Tl.Plant(0);
+                    if (x == closestZombieLane)
+                    {
+                        Ab.AddReward(500f);
+                    }
                     return;
                 }
             }
         }
         else
         {
-            Ab.AddReward(-0.01f);
+            //Ab.AddReward(-0.01f);
         }
-
+    }
+    public int[] GetPlantsOnLane()
+    {
+        int[] Fl = new int[5];
+        for (int i = 0; i <= 4; i++)
+        {
+            Fl[i] = 0;
+        }
+        GameObject[] Gm = GameObject.FindGameObjectsWithTag("plant");
+        int ln = Gm.Length - 1;
+        for (int i = 0; i <= ln; i++)
+        {
+            AllPlant Al = Gm[i].GetComponent<AllPlant>();
+            if (Al.Sc == GetComponent<ScriptCentralizer>())
+            {
+                Fl[Al.Lane] += 1;
+            }
+        }
+        return Fl;
     }
 
     public int[] GetNrZombie()
@@ -105,9 +134,28 @@ public class ScriptCentralizer : MonoBehaviour
         return Wm.LaneCounter;
 
     }
-    public int[] GetClosestZombies()
+    public float[] GetClosestZombies()
     {
-        return new int[5];
+        float[] Fl = new float[5];
+        for(int i = 0; i <= 4; i++)
+        {
+            Fl[i] = 0;
+        }
+        GameObject[] Gm = GameObject.FindGameObjectsWithTag("zombie");
+        int ln = Gm.Length - 1;
+        for (int i = 0; i <= ln; i++)
+        {
+            AllZombie Al = Gm[i].GetComponent<AllZombie>();
+            if (Al.Sc == GetComponent<ScriptCentralizer>())
+            {
+                if (Fl[Al.lane] < Al.moved )
+                {
+                    Fl[Al.lane] = Al.moved;
+                }
+            }
+        }
+
+        return Fl;
     }
 
     IEnumerator AddSuns()

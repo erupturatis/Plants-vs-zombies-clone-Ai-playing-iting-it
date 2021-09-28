@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AllZombie : MonoBehaviour
 {
-    public int health = 30;
+    public int health = 20;
     public int Type = 0;
     public float Ms = 0;
     public int lane = 0;
@@ -16,6 +16,9 @@ public class AllZombie : MonoBehaviour
 
     float DisFromStart;
     public float StartX;
+
+    [HideInInspector]
+    public float moved = 0f;
 
     float MsCopy;
 
@@ -64,12 +67,10 @@ public class AllZombie : MonoBehaviour
         {
             Die();
         }
-        Sc = Wm.Sc;
-        Sc.Fitness -= Time.deltaTime * (StartX - transform.position.x);
- 
-        if (StartX-transform.position.x > 14f)
+        moved = StartX - transform.position.x;
+        if (moved > 14f)
         {
-            Sc.Fitness = -100;
+            Sc.Fitness = -1000;
             Sc.Die();
         }
         
@@ -86,8 +87,6 @@ public class AllZombie : MonoBehaviour
             TileScript T = Gm.GetComponent<TileScript>();
             CurrentTile = T;
             CurrentTile.ZombiesStanding += 1;
-
-
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
